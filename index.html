@@ -52,15 +52,10 @@
     nav {
       display: flex;
       justify-content: center;
-      align-items: center;
-      gap: 2.5rem;
+      gap: 3rem;
       font-weight: 600;
       font-size: 1.1rem;
       letter-spacing: 0.05em;
-      position: relative;
-    }
-    nav a {
-      z-index: 1;
     }
     nav a.active,
     nav a:hover {
@@ -69,16 +64,13 @@
       padding-bottom: 0.2rem;
     }
 
-    /* Logo container in nav */
-    .nav-logo {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 0;
-      pointer-events: none;
+    /* Logo below navbar */
+    .logo-container {
+      margin: 1.5rem 0 3rem 0;
+      text-align: center;
     }
-    .nav-logo img {
-      height: 50px;
+    .logo-container img {
+      height: 60px;
       width: auto;
       filter: brightness(0) invert(1);
       /* White logo by default */
@@ -245,7 +237,7 @@
       #about iframe {
         height: 250px;
       }
-      .nav-logo img {
+      .logo-container img {
         height: 40px;
       }
     }
@@ -256,17 +248,16 @@
     <nav>
       <a href="#hero" class="active">Home</a>
       <a href="#about">About</a>
-
-      <!-- Logo in the middle -->
-      <div class="nav-logo" aria-label="Retratura Logo">
-        <!-- Replace the src below with your actual logo image -->
-        <img src="https://via.placeholder.com/150x50?text=Retratura+Logo" alt="Retratura Logo" />
-      </div>
-
       <a href="#portfolio">Portfolio</a>
       <a href="#contact">Hire Us</a>
     </nav>
   </header>
+
+  <!-- Logo below navbar -->
+  <div class="logo-container" aria-label="Retratura Logo">
+    <!-- Upload your logo file in the same folder and update the src below -->
+    <img src="logo.png" alt="Retratura Logo" />
+  </div>
 
   <main>
     <section id="hero" aria-label="Hero Section">
@@ -289,10 +280,10 @@
       </div>
       <div class="video-container" aria-label="Documentary Film Video">
         <iframe
-          src="https://www.youtube.com/embed/your_video_id_here"
-          title="Retratura Documentary Film"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          src="https://drive.google.com/file/d/YOUR_FILE_ID/preview"
+          allow="autoplay"
           allowfullscreen
+          title="Retratura Documentary Film"
         ></iframe>
       </div>
     </section>
