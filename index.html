@@ -4,6 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Retratura | Photography Studio</title>
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&family=Playfair+Display:wght@700&display=swap"
+    rel="stylesheet"
+  />
+
   <style>
     /* Reset & base */
     * {
@@ -15,21 +22,24 @@
       scroll-behavior: smooth;
     }
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Montserrat', sans-serif;
       background-color: #000;
       color: #fff;
       line-height: 1.6;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      overflow-x: hidden;
     }
     a {
       color: #d4af37;
       text-decoration: none;
-      transition: color 0.3s ease;
+      transition: color 0.3s ease, transform 0.3s ease;
+      cursor: pointer;
     }
     a:hover {
       color: #fff;
+      transform: scale(1.05);
     }
 
     /* Container */
@@ -48,6 +58,7 @@
       position: sticky;
       top: 0;
       z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
     }
     nav {
       display: flex;
@@ -56,6 +67,7 @@
       font-weight: 600;
       font-size: 1.1rem;
       letter-spacing: 0.05em;
+      user-select: none;
     }
     nav a.active,
     nav a:hover {
@@ -68,12 +80,20 @@
     .logo-container {
       margin: 1.5rem 0 3rem 0;
       text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    .logo-container.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     .logo-container img {
       height: 60px;
       width: auto;
       filter: brightness(0) invert(1);
       /* White logo by default */
+      user-select: none;
     }
 
     /* Hero Section */
@@ -85,38 +105,59 @@
       height: 90vh;
       text-align: center;
       padding: 0 1rem;
+      background: linear-gradient(135deg, #000000, #1a1a1a);
+      background-size: 400% 400%;
+      animation: gradientShift 20s ease infinite;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1.5s ease, transform 1.5s ease;
+    }
+    #hero.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     #hero h1 {
-      font-size: 3.5rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 3.8rem;
       font-weight: 700;
       color: #d4af37;
       margin-bottom: 1rem;
-      font-family: 'Georgia', serif;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
+      text-shadow: 0 0 8px #d4af37aa;
     }
     #hero p {
-      font-size: 1.5rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.6rem;
       max-width: 600px;
       color: #fff;
       font-style: italic;
       font-weight: 300;
+      text-shadow: 0 0 6px #000000cc;
     }
 
     /* Sections */
     section {
       padding: 4rem 0;
       border-bottom: 1px solid #222;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     section:last-of-type {
       border-bottom: none;
     }
     h2.section-title {
       text-align: center;
-      font-size: 2.5rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
       margin-bottom: 2rem;
       color: #d4af37;
-      font-family: 'Georgia', serif;
       letter-spacing: 0.1em;
+      text-shadow: 0 0 6px #d4af37bb;
     }
 
     /* About */
@@ -124,12 +165,14 @@
       max-width: 800px;
       margin: 0 auto 3rem auto;
       text-align: center;
-      font-size: 1.2rem;
-      line-height: 1.8;
+      font-size: 1.25rem;
+      line-height: 1.9;
       color: #eee;
+      font-weight: 300;
     }
     #about .content strong {
       color: #d4af37;
+      font-weight: 600;
     }
     #about .video-container {
       max-width: 800px;
@@ -137,7 +180,11 @@
       border: 3px solid #d4af37;
       border-radius: 8px;
       overflow: hidden;
-      box-shadow: 0 0 15px #d4af37;
+      box-shadow: 0 0 20px #d4af37cc;
+      transition: box-shadow 0.3s ease;
+    }
+    #about .video-container:hover {
+      box-shadow: 0 0 30px #ffd700dd;
     }
     #about iframe {
       width: 100%;
@@ -160,13 +207,15 @@
       object-fit: cover;
       border: 3px solid #d4af37;
       border-radius: 8px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
       cursor: pointer;
       filter: brightness(0.9);
+      box-shadow: 0 0 8px #000000cc;
+      user-select: none;
     }
     #portfolio .gallery img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px #d4af37;
+      transform: scale(1.07) rotate(1deg);
+      box-shadow: 0 0 25px #d4af37cc;
       filter: brightness(1);
     }
 
@@ -182,6 +231,7 @@
       font-weight: 600;
       color: #d4af37;
       letter-spacing: 0.05em;
+      user-select: none;
     }
     #contact input,
     #contact textarea {
@@ -191,14 +241,15 @@
       background: #111;
       color: #fff;
       font-size: 1rem;
-      font-family: inherit;
-      transition: border-color 0.3s ease;
+      font-family: 'Montserrat', sans-serif;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
       resize: vertical;
     }
     #contact input:focus,
     #contact textarea:focus {
       outline: none;
       border-color: #fff;
+      box-shadow: 0 0 8px #d4af37cc;
     }
     #contact button {
       background: #d4af37;
@@ -210,10 +261,12 @@
       cursor: pointer;
       font-size: 1.1rem;
       letter-spacing: 0.05em;
-      transition: background 0.3s ease;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
     }
     #contact button:hover {
       background: #b38f1b;
+      box-shadow: 0 0 15px #ffd700cc;
     }
 
     /* Footer */
@@ -224,21 +277,35 @@
       color: #666;
       background: #111;
       margin-top: auto;
+      user-select: none;
     }
 
     /* Responsive */
     @media (max-width: 600px) {
       #hero h1 {
-        font-size: 2.5rem;
+        font-size: 2.8rem;
       }
       #hero p {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
       }
       #about iframe {
         height: 250px;
       }
       .logo-container img {
         height: 40px;
+      }
+    }
+
+    /* Background gradient animation */
+    @keyframes gradientShift {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
       }
     }
   </style>
@@ -252,6 +319,12 @@
       <a href="#contact">Hire Us</a>
     </nav>
   </header>
+
+  <!-- Logo below navbar -->
+  <div class="logo-container" aria-label="Retratura Logo">
+    <!-- Upload your logo file in the same folder and update the src below -->
+    <img src="logo.png" alt="Retratura Logo" />
+  </div>
 
   <main>
     <section id="hero" aria-label="Hero Section">
@@ -273,7 +346,12 @@
         </p>
       </div>
       <div class="video-container" aria-label="Documentary Film Video">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/hGbECrNhL4o?si=FnMEkXkc57zG5g0N" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe
+          src="https://drive.google.com/file/d/YOUR_FILE_ID/preview"
+          allow="autoplay"
+          allowfullscreen
+          title="Retratura Documentary Film"
+        ></iframe>
       </div>
     </section>
 
@@ -281,7 +359,7 @@
       <h2 class="section-title">Our Works</h2>
       <div class="gallery">
         <img
-          src="sample1.jpg"
+          src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"
           alt="Elegant woman portrait 1"
           loading="lazy"
         />
@@ -355,6 +433,12 @@
   </footer>
 
   <script>
+    // Fade in hero and logo on page load
+    window.addEventListener('load', () => {
+      document.getElementById('hero').classList.add('visible');
+      document.querySelector('.logo-container').classList.add('visible');
+    });
+
     // Highlight active nav link on scroll
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('nav a');
@@ -362,7 +446,7 @@
     function changeActiveLink() {
       let index = sections.length;
 
-      while (--index && window.scrollY + 100 < sections[index].offsetTop) {}
+      while (--index && window.scrollY + 120 < sections[index].offsetTop) {}
 
       navLinks.forEach((link) => link.classList.remove('active'));
       navLinks[index].classList.add('active');
@@ -370,6 +454,24 @@
 
     changeActiveLink();
     window.addEventListener('scroll', changeActiveLink);
+
+    // Fade in sections on scroll
+    const observerOptions = {
+      threshold: 0.1,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach((section) => {
+      observer.observe(section);
+    });
 
     // Simple form validation and submission simulation
     const form = document.getElementById('contactForm');
