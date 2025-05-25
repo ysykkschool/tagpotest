@@ -1,36 +1,357 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tagpo Concepts - Home</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Retratura | Photography Studio</title>
+  <style>
+    /* Reset & base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #000;
+      color: #fff;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    a {
+      color: #d4af37;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color: #fff;
+    }
+
+    /* Container */
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 0;
+    }
+
+    /* Header & Nav */
+    header {
+      background: #000;
+      padding: 1rem 0;
+      border-bottom: 1px solid #d4af37;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+    }
+    nav a.active,
+    nav a:hover {
+      color: #d4af37;
+      border-bottom: 2px solid #d4af37;
+      padding-bottom: 0.2rem;
+    }
+
+    /* Hero Section */
+    #hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 90vh;
+      text-align: center;
+      padding: 0 1rem;
+    }
+    #hero h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: #d4af37;
+      margin-bottom: 1rem;
+      font-family: 'Georgia', serif;
+      letter-spacing: 0.1em;
+    }
+    #hero p {
+      font-size: 1.5rem;
+      max-width: 600px;
+      color: #fff;
+      font-style: italic;
+      font-weight: 300;
+    }
+
+    /* Sections */
+    section {
+      padding: 4rem 0;
+      border-bottom: 1px solid #222;
+    }
+    section:last-of-type {
+      border-bottom: none;
+    }
+    h2.section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: #d4af37;
+      font-family: 'Georgia', serif;
+      letter-spacing: 0.1em;
+    }
+
+    /* About */
+    #about .content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: #eee;
+    }
+    #about .content strong {
+      color: #d4af37;
+    }
+
+    /* Portfolio */
+    #portfolio .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    #portfolio .gallery img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      border: 3px solid #d4af37;
+      border-radius: 8px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      filter: brightness(0.9);
+    }
+    #portfolio .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #d4af37;
+      filter: brightness(1);
+    }
+
+    /* Contact */
+    #contact form {
+      max-width: 500px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    #contact label {
+      font-weight: 600;
+      color: #d4af37;
+      letter-spacing: 0.05em;
+    }
+    #contact input,
+    #contact textarea {
+      padding: 0.8rem 1rem;
+      border: 2px solid #d4af37;
+      border-radius: 6px;
+      background: #111;
+      color: #fff;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: border-color 0.3s ease;
+      resize: vertical;
+    }
+    #contact input:focus,
+    #contact textarea:focus {
+      outline: none;
+      border-color: #fff;
+    }
+    #contact button {
+      background: #d4af37;
+      color: #000;
+      font-weight: 700;
+      padding: 0.9rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+      transition: background 0.3s ease;
+    }
+    #contact button:hover {
+      background: #b38f1b;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1.5rem 0;
+      font-size: 0.9rem;
+      color: #666;
+      background: #111;
+      margin-top: auto;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      #hero h1 {
+        font-size: 2.5rem;
+      }
+      #hero p {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <nav>
+      <a href="#hero" class="active">Home</a>
+      <a href="#about">About</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#contact">Hire Us</a>
+    </nav>
+  </header>
 
-<header>
-    <h1>Tagpo Concepts</h1>
-    <p>Your Partner in Creative Solutions</p>
-</header>
-
-<nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="works.html">Works</a>
-    <a href="contact.html">Contact Us</a>
-</nav>
-
-<div class="container">
-    <section id="welcome">
-        <h2>Welcome to Tagpo Concepts</h2>
-        <p>We are a dedicated team of creative professionals committed to delivering exceptional solutions for our clients.</p>
+  <main>
+    <section id="hero" aria-label="Hero Section">
+      <h1>Retratura</h1>
+      <p>The Glamour of culture captured in style.</p>
     </section>
-</div>
 
-<footer>
-    <p>Copyright &copy; 2023 Tagpo Concepts. All rights reserved.</p>
-</footer>
+    <section id="about" aria-label="About Retratura">
+      <h2 class="section-title">About Us</h2>
+      <div class="content">
+        <p>
+          <strong>Mission:</strong> We strive to bring out elegance and beauty,
+          and empower women through our photo services.
+        </p>
+        <p>
+          <strong>Vision:</strong> To collaborate with upstarting glamour and
+          fashion brands, and serve as each other’s stepping stone in promoting
+          beauty in pictures.
+        </p>
+      </div>
+    </section>
 
+    <section id="portfolio" aria-label="Portfolio Gallery">
+      <h2 class="section-title">Our Works</h2>
+      <div class="gallery">
+        <img
+          src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"
+          alt="Elegant woman portrait 1"
+          loading="lazy"
+        />
+        <img
+          src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80"
+          alt="Elegant woman portrait 2"
+          loading="lazy"
+        />
+        <img
+          src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80"
+          alt="Elegant woman portrait 3"
+          loading="lazy"
+        />
+        <img
+          src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80"
+          alt="Elegant woman portrait 4"
+          loading="lazy"
+        />
+        <img
+          src="https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?auto=format&fit=crop&w=800&q=80"
+          alt="Elegant woman portrait 5"
+          loading="lazy"
+        />
+        <img
+          src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=800&q=80"
+          alt="Elegant woman portrait 6"
+          loading="lazy"
+        />
+      </div>
+    </section>
+
+    <section id="contact" aria-label="Contact and Hire Us">
+      <h2 class="section-title">Hire Us</h2>
+      <form id="contactForm" novalidate>
+        <label for="name">Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Your full name"
+          required
+          minlength="2"
+        />
+
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="your.email@example.com"
+          required
+        />
+
+        <label for="message">Message</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          placeholder="Tell us about your project or inquiry"
+          required
+          minlength="10"
+        ></textarea>
+
+        <button type="submit">Send Inquiry</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Retratura Photography Studio. All rights reserved.
+  </footer>
+
+  <script>
+    // Highlight active nav link on scroll
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('nav a');
+
+    function changeActiveLink() {
+      let index = sections.length;
+
+      while (--index && window.scrollY + 100 < sections[index].offsetTop) {}
+
+      navLinks.forEach((link) => link.classList.remove('active'));
+      navLinks[index].classList.add('active');
+    }
+
+    changeActiveLink();
+    window.addEventListener('scroll', changeActiveLink);
+
+    // Simple form validation and submission simulation
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      // Simulate form submission
+      alert(
+        `Thank you, ${form.name.value}! Your message has been received. We will contact you soon.`
+      );
+      form.reset();
+    });
+  </script>
 </body>
 </html>
